@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Caesar Spy App</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
     <div class="container">
         <h1>🕵️ Caesar Cipher Terminal</h1>
         <form method="POST">
-            <textarea name="message" maxlength="500" placeholder="Type your secret message..." required>{{ original_text }}</textarea>
+            <textarea name="message" maxlength="500" placeholder="Type your secret message..."
+                required>{{ original_text }}</textarea>
             <input type="number" name="shift" value="{{ shift }}" placeholder="Shift amount" min="1" max="25" required>
             <div class="buttons">
                 <button type="submit" name="action" value="encode">Encode 🔐</button>
@@ -17,11 +20,17 @@
             </div>
         </form>
         {% if result %}
-            <div class="output">
-                <h3>🧾 Result:</h3>
-                <p>{{ result }}</p>
-            </div>
+        <div class="output">
+            <h3>🧾 Result:</h3>
+            <p id="encodedText">{{ result }}</p>
+            <form method="POST" action="/save">
+                <input type="hidden" name="encoded_message" value="{{ result }}">
+                <button id="saveBtn" type="submit">💾 Save to File</button>
+            </form>
+        </div>
         {% endif %}
+
     </div>
 </body>
+
 </html>

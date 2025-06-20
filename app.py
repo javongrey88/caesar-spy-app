@@ -37,3 +37,23 @@ def index():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+@app.route("/save", methods=["POST"])
+def save_to_file():
+    encoded_message = request.form["encoded_message"]
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"encoded_message_{timestamp}.txt"
+
+    # Create a text file in memory
+    file_stream = io.BytesIO()
+    file_stream.write(encoded_message.encode("utf-8"))
+    file_stream.seek(0)
+
+    return send_file(
+        file_stream,
+        as_attachment=True,
+        download_name=filename,
+        mimetype='text/plain'
+    )
+
+

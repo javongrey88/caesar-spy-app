@@ -18,7 +18,8 @@ body {
     box-shadow: 0 0 20px #00FF41;
 }
 
-textarea, input {
+textarea,
+input {
     width: 100%;
     padding: 10px;
     background: #0D0D0D;
@@ -47,4 +48,17 @@ button:hover {
     background: #121212;
     padding: 10px;
     border-left: 5px solid #00FF41;
+}
+
+#saveBtn {
+    margin-top: 10px;
+    background-color: #2E2E2E;
+    border: 1px solid #00FF41;
+    color: #00FF41;
+    padding: 10px 20px;
+}
+
+#saveBtn:hover {
+    background-color: #00FF41;
+    color: black;
 }
