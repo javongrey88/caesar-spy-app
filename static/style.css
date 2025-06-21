@@ -62,3 +62,25 @@ button:hover {
     background-color: #00FF41;
     color: black;
 }
+
+.output {
+    margin-top: 20px;
+    padding: 10px;
+    border-left: 5px solid #00FF41;
+    background: #121212;
+    font-family: 'Courier New', monospace;
+}
+
+form[action="/save"] {
+    margin-top: 10px;
+}
+
+/* Encode Green Border */
+.output-encode {
+    border-left: 5px solid #00FF41;
+}
+
+/* Decode Red Border */
+.output-decode {
+    border-left: 5px solid #FF4141;
+}

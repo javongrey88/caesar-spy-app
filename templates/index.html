@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Caesar Cipher Terminal</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 
 <body>
@@ -20,13 +21,12 @@
         </form>
 
         {% if action == "encode" and result %}
-        <div class="output">
+        <div class="output output-encode">
             <h3>🧾 Encoded Result:</h3>
-            <p>{{ result }}</p>
-
+            <p id="encodedText">{{ result }}</p>
             <form method="POST" action="/save">
                 <input type="hidden" name="encoded_message" value="{{ result }}">
-                <button id="saveBtn" type="submit">💾 Save Encoded Message</button>
+                <button type="submit">💾 Save Encoded Message</button>
             </form>
         </div>
         {% endif %}
@@ -42,13 +42,12 @@
         </form>
 
         {% if action == "decode" and result %}
-        <div class="output">
+        <div class="output output-decode">
             <h3>📜 Decoded Result:</h3>
-            <p>{{ result }}</p>
-
+            <p id="decodedText">{{ result }}</p>
             <form method="POST" action="/save">
                 <input type="hidden" name="encoded_message" value="{{ result }}">
-                <button id="saveBtn" type="submit">💾 Save Decoded Message</button>
+                <button type="submit">💾 Save Decoded Message</button>
             </form>
         </div>
         {% endif %}
