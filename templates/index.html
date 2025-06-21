@@ -3,33 +3,55 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Caesar Spy App</title>
+    <title>Caesar Cipher Terminal</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
     <div class="container">
         <h1>🕵️ Caesar Cipher Terminal</h1>
+
+        <!-- ENCODE SECTION -->
         <form method="POST">
-            <textarea name="message" maxlength="500" placeholder="Type your secret message..."
-                required>{{ original_text }}</textarea>
-            <input type="number" name="shift" value="{{ shift }}" placeholder="Shift amount" min="1" max="25" required>
-            <div class="buttons">
-                <button type="submit" name="action" value="encode">Encode 🔐</button>
-                <button type="submit" name="action" value="decode">Decode 🔓</button>
-            </div>
+            <label for="encode_input">🔐 Encode Message</label>
+            <textarea name="encode_input" id="encode_input" maxlength="500"
+                placeholder="Type your secret message to encode...">{{ original_text if action == "encode" else "" }}</textarea>
+            <button type="submit" name="action" value="encode">Encode 🔐</button>
         </form>
-        {% if result %}
+
+        {% if action == "encode" and result %}
         <div class="output">
-            <h3>🧾 Result:</h3>
-            <p id="encodedText">{{ result }}</p>
+            <h3>🧾 Encoded Result:</h3>
+            <p>{{ result }}</p>
+
             <form method="POST" action="/save">
                 <input type="hidden" name="encoded_message" value="{{ result }}">
-                <button id="saveBtn" type="submit">💾 Save to File</button>
+                <button id="saveBtn" type="submit">💾 Save Encoded Message</button>
             </form>
         </div>
         {% endif %}
 
+        <hr>
+
+        <!-- DECODE SECTION -->
+        <form method="POST">
+            <label for="decode_input">🔓 Decode Message</label>
+            <textarea name="decode_input" id="decode_input" maxlength="500"
+                placeholder="Paste the encoded message here to decode...">{{ original_text if action == "decode" else "" }}</textarea>
+            <button type="submit" name="action" value="decode">Decode 🔓</button>
+        </form>
+
+        {% if action == "decode" and result %}
+        <div class="output">
+            <h3>📜 Decoded Result:</h3>
+            <p>{{ result }}</p>
+
+            <form method="POST" action="/save">
+                <input type="hidden" name="encoded_message" value="{{ result }}">
+                <button id="saveBtn" type="submit">💾 Save Decoded Message</button>
+            </form>
+        </div>
+        {% endif %}
     </div>
 </body>
 
